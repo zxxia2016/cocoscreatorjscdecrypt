@@ -1,0 +1,25 @@
+执行1
+apktool.bat d test.apk
+
+执行2
+替换文件
+
+执行3
+apktool.bat b star
+
+执行4
+cd star\dist
+Zipalign -v 4 star.apk dst.apk
+
+执行5
+拷贝key593.jks文件到该目录
+apksigner sign -verbose --ks .\key593.jks --v1-signing-enabled false --v2-signing-enabled true --ks-key-alias game593 --ks-pass pass:game593170223 --key-pass pass:game593170223 --out  .\app-signed-aligned.apk .\dst.apk
+
+执行6:
+adb install -r app-signed-aligned.apk
+
+执行7：
+发送出去
+
+
+iOS直接修改info.plis中的包名和应用名还有icon即可
