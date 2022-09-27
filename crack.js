@@ -16,8 +16,8 @@ var path = require("path")
 var pako = require("pako")
 var xxtea = require("xxtea-node");
 
-var FILEPATH = path.resolve('./../cn.isir.jz2/');
-var KEY = "18237418234-f3a3-4b"  //cocoscreator 的 工程加密key
+var FILEPATH = path.resolve('./src/');
+var KEY = "9e988deb-dab7-4b"  //cocoscreator 的 工程加密key
 var UNZIP = true              //是否启用压缩
 
 //不带后缀的全路径名
