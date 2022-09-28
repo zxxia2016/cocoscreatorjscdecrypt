@@ -29,9 +29,9 @@ adb install -r app-signed-aligned.apk
 ==============================================================================
 ios
 ==============================================================================
-1. 替换icon
-2. 用cocos build生成helloworld.app;修改info.plist里的bundleid和名字
+1. 重命名icon，用于生成assets.car
+2. 用cocos build生成helloworld.app，取出assets.car;修改info.plist里的bundleid和名字
 3. 拷贝到win；
 4. 修改ipa为zip
-5. 替换assets.car、各种icon、info.plist、res文件夹里
+5. 替换assets.car、info.plist、24张icon、、res文件夹里的2张图、project.jsc
 6. 修改zip为ipa
