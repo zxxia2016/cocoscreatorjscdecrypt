@@ -17,7 +17,7 @@ var pako = require("pako")
 var xxtea = require("xxtea-node");
 
 var FILEPATH = path.resolve('./src/');
-var KEY = "9e988deb-dab7-4b"  //cocoscreator 的 工程加密key
+var KEY = "rpr9ojol-u2ct-he"  //cocoscreator 的 工程加密key
 var UNZIP = true              //是否启用压缩
 
 //不带后缀的全路径名

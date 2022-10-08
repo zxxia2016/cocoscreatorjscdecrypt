@@ -1,16 +1,20 @@
 //1. 按replace文件夹放资源
 //2. star.apk
 //3. 填写下面秘钥以及URL以及包名
-const key = `9e988deb-dab7-4b`;
+//const key = `9e988deb-dab7-4b`;
+const key = `rpr9ojol-u2ct-he`;
+
 const package = `com.thai.lucky1.p${Math.floor(Date.now() / 1000)}`;
 const appName = `果品娱乐`;
 const url = `https://gpkj-update.oss-cn-shenzhen.aliyuncs.com/`;
+
 const child_process = require('child_process');
 const fs = require('fs');
-const path = require('path')
-
+const path = require('path');
+// console.log(path.resolve());
+// console.log(path.join(path.resolve(), `../../src/project.jsc`))
 //1. 解包
-// child_process.execFileSync('decode.bat', null, { cwd: '../' });
+child_process.execFileSync('decode.bat', null, { cwd: '../' });
 //2. 拷贝project.jsc
 fs.copyFileSync(`../star/assets/src/project.jsc`, `../../src/project.jsc`);
 //3. 替换key
@@ -36,9 +40,14 @@ if (!ret) {
 regex = new RegExp(ret[0], "g")
 project = project.replace(regex, `preloadUrl: "` + url);
 fs.writeFileSync(`../../src/project.js`, project);
+
 //6. 将project.js >> jsc
 child_process.execFileSync('encode.bat', null, { cwd: '../../' });
 //7. 将project.jsc >> replace dir
+if (!fs.existsSync(`../../src/project.jsc`)) {
+    console.error(`project.jsc not found.`);
+    return;
+}
 fs.copyFileSync(`../../src/project.jsc`, `../replace/assets/src/project.jsc`);
 //8. 替换文件（assets、res文件夹、project.jsc）
 //调用文件遍历方法

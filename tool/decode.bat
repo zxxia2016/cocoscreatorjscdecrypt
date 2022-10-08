@@ -1,2 +1,2 @@
 echo "encode"
-apktool.bat d star.apk
+apktool.bat d -f star.apk
