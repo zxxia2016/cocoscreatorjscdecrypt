@@ -103,7 +103,7 @@ const dist = `../star/dist/dst.apk`
 if (fs.existsSync(dist)) {
     fs.unlinkSync(dist);
 }
-child_process.execSync('Zipalign -v 4 star.apk dst.apk', { cwd: '../star/dist/' });
+child_process.execSync('Zipalign -v -f 4 star.apk dst.apk', { cwd: '../star/dist/' });
 
 //13. 签名
 const cmd = `apksigner sign -verbose --ks ../../key593.jks --v1-signing-enabled false --v2-signing-enabled true --ks-key-alias game593 --ks-pass pass:game593170223 --key-pass pass:game593170223 --out  ../../output/app-signed-aligned.apk dst.apk`;
