@@ -85,7 +85,7 @@ if (!ret) {
 manifest = manifest.replace(regex, package);
 fs.writeFileSync(manifestFile, manifest);
 //10. 替换appName
-const stringsFile = `../star//res/values/strings.xml`;
+const stringsFile = `../star/res/values/strings.xml`;
 let strings = fs.readFileSync(stringsFile, { encoding: 'utf8', flag: 'r' });
 regex = new RegExp('<string name="app_name">(\\S)+</string>', "g");
 ret = strings.match(regex);
