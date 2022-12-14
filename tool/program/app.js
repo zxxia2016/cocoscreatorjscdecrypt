@@ -2,15 +2,18 @@
 //2. star.apk
 //3. 填写下面秘钥以及URL以及包名
 //const key = `9e988deb-dab7-4b`;
-const key = `rpr9ojol-u2ct-he`;
+const key = `864mipev-7xnn-cs`;
 
 const package = `com.thai.lucky1.p${Math.floor(Date.now() / 1000)}`;
-const appName = `果品娱乐`;
-const url = `https://gpkj-update.oss-cn-shenzhen.aliyuncs.com/`;
+const appName = `万星国际`;
+const url = `https://wxgj-update.oss-cn-shenzhen.aliyuncs.com/`;
 
 const child_process = require('child_process');
 const fs = require('fs');
 const path = require('path');
+
+const startTime = Date.now();
+
 // console.log(path.resolve());
 // console.log(path.join(path.resolve(), `../../src/project.jsc`))
 //1. 解包
@@ -110,4 +113,5 @@ const cmd = `apksigner sign -verbose --ks ../../key593.jks --v1-signing-enabled 
 
 child_process.execSync(cmd, { cwd: '../star/dist/' });
 
-console.log(`end`)
+const time = Math.round((Date.now() - startTime) / 1000 / 60);
+console.log(`runtime: 4${time}minutes`);
