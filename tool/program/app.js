@@ -114,4 +114,4 @@ const cmd = `apksigner sign -verbose --ks ../../key593.jks --v1-signing-enabled 
 child_process.execSync(cmd, { cwd: '../star/dist/' });
 
 const time = Math.round((Date.now() - startTime) / 1000 / 60);
-console.log(`runtime: 4${time}minutes`);
+console.log(`runtime: ${time} minutes`);
