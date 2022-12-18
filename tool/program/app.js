@@ -42,6 +42,14 @@ if (!ret) {
 }
 regex = new RegExp(ret[0], "g")
 project = project.replace(regex, `preloadUrl: "` + url);
+//5. 替换游戏名
+regex = new RegExp(`gameName: \".*\",`, "g")
+ret = project.match(regex);
+if (!ret) {
+    console.error(`not match gameName`);
+    return;
+}
+project = project.replace(regex, `gameName: "${appName}",`);
 fs.writeFileSync(`../../src/project.js`, project);
 
 //6. 将project.js >> jsc
