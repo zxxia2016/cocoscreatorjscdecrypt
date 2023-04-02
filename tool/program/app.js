@@ -1,13 +1,19 @@
 //1. 按replace文件夹放资源
 //2. star.apk
 //3. 填写下面秘钥以及URL以及包名
-const key = `9e988deb-dab7-4b`;
+const key = `x18f8iwz-2wuq-3s`;
 // const key = `rpr9ojol-u2ct-he`;
 
 const package = `com.thai.lucky1.p${Math.floor(Date.now() / 1000)}`;
 // const package = `com.thai.lucky1.p1676471535`;
-const appName = `维多利亚`;
-const url = `https://wdly1-update.oss-accelerate.aliyuncs.com/`;
+const appName = `openUpdate`;
+const url = `http://120.79.208.194:5432/`;
+// const url = `https://wdly1-update.oss-accelerate.aliyuncs.com/`;
+
+//如果要手动修改URL和把下面2个值设置成false、然后project.js即可
+const replaceUrl = false;
+const decodeJsc = false;
+const replaceName = true;
 
 const child_process = require('child_process');
 const fs = require('fs');
@@ -32,28 +38,36 @@ if (!ret) {
 crack = crack.replace(ret[1], key);
 fs.writeFileSync(`../../crack.js`, crack);
 //4. 解密
-child_process.execFileSync('decode.bat', null, { cwd: '../../' });
-//5. 替换服务器URL
+if (decodeJsc) {
+    child_process.execFileSync('decode.bat', null, { cwd: '../../' });
+}
 let project = fs.readFileSync(`../../src/project.js`, { encoding: 'utf8', flag: 'r' });
-regex = new RegExp('preloadUrl: "https://([0-9a-zA-Z]+)-update.oss-([\\S]+).aliyuncs.com/');
-ret = project.match(regex);
-if (!ret) {
-    console.error(`not match url`);
-    return;
-}
-// console.log(ret[0])
-regex = new RegExp(ret[0], "g")
-project = project.replace(regex, `preloadUrl: "` + url);
-//5. 替换游戏名
-regex = new RegExp(`gameName: \".*\",`, "g")
-ret = project.match(regex);
-if (!ret) {
-    console.error(`not match gameName`);
-    return;
-}
-project = project.replace(regex, `gameName: "${appName}",`);
-fs.writeFileSync(`../../src/project.js`, project);
 
+//5. 替换服务器URL
+if (replaceUrl) {
+    // regex = new RegExp('https://([0-9a-zA-Z]+)-([\\S]+).oss-([\\S]+).aliyuncs.com/');
+    regex = new RegExp('https://([\\S]+)-([\\S]+).oss-([\\S]+).aliyuncs.com/', "g");
+    ret = project.match(regex);
+    if (!ret) {
+        console.error(`not match url`);
+        return;
+    }
+    ret.forEach((element, idx) => {
+        console.log(`idx${idx}:` + element);
+    });
+    project = project.replace(regex, url);
+}
+if (replaceName) {
+    //5. 替换游戏名
+    regex = new RegExp(`gameName: \".*\",`, "g")
+    ret = project.match(regex);
+    if (!ret) {
+        console.error(`not match gameName`);
+        return;
+    }
+    project = project.replace(regex, `gameName: "${appName}",`);
+    fs.writeFileSync(`../../src/project.js`, project);
+}
 //6. 将project.js >> jsc
 child_process.execFileSync('encode.bat', null, { cwd: '../../' });
 //7. 将project.jsc >> replace dir
