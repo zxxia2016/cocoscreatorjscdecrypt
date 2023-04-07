@@ -1,19 +1,20 @@
 //1. 按replace文件夹放资源
 //2. star.apk
 //3. 填写下面秘钥以及URL以及包名
-const key = `x18f8iwz-2wuq-3s`;
-// const key = `rpr9ojol-u2ct-he`;
+// const key = `x18f8iwz-2wuq-3s`;
+const key = `rpr9ojol-u2ct-he`;
 
 const package = `com.thai.lucky1.p${Math.floor(Date.now() / 1000)}`;
 // const package = `com.thai.lucky1.p1676471535`;
-const appName = `openUpdate`;
-const url = `http://120.79.208.194:5432/`;
+const appName = `炫赫`;
+const url = `https://jsyl-update.oss-accelerate.aliyuncs.com/`;
 // const url = `https://wdly1-update.oss-accelerate.aliyuncs.com/`;
 
 //如果要手动修改URL和把下面2个值设置成false、然后project.js即可
-const replaceUrl = false;
-const decodeJsc = false;
-const replaceName = true;
+const custom = false;
+const replaceUrl = !custom;
+const decodeJsc = !custom;
+const replaceName = !custom;
 
 const child_process = require('child_process');
 const fs = require('fs');
@@ -53,7 +54,7 @@ if (replaceUrl) {
         return;
     }
     ret.forEach((element, idx) => {
-        console.log(`idx${idx}:` + element);
+        console.log(`idx ${idx}:` + element);
     });
     project = project.replace(regex, url);
 }
